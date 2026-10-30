@@ -52,10 +52,12 @@ payment, settlement or individual off-hire events.
 ## Public case workbench
 
 [Open the static public workbench](public-workbench.html) or download the HTML
-file and open it locally. It displays the same 26 pseudonymous identities and
-reported coverage from `public_demo.json`. It has no forms, scripts, network
-requests or write operations. It is a bounded demo, not a current operational
-dashboard or a verified business record.
+file and open it locally. It displays the same 26 pseudonymous identities,
+reported coverage, per-container timelines and off-hire status, missing
+evidence, and a case-status explanation from `public_demo.json`. These are the
+four read-only query views of this public fixture. It has no forms, scripts,
+network requests or write operations. It is a bounded demo, not the private
+live Workbench, a current operational dashboard or a verified business record.
 
 Regenerate the file after installing the package:
 
