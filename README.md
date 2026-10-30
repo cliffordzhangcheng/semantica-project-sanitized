@@ -49,6 +49,20 @@ print(get_missing_evidence("CASE-DEMO-001"))
 Unknown identities fail closed. No query mutates the fixture or infers missing
 payment, settlement or individual off-hire events.
 
+## Public case workbench
+
+[Open the static public workbench](public-workbench.html) or download the HTML
+file and open it locally. It displays the same 26 pseudonymous identities and
+reported coverage from `public_demo.json`. It has no forms, scripts, network
+requests or write operations. It is a bounded demo, not a current operational
+dashboard or a verified business record.
+
+Regenerate the file after installing the package:
+
+```sh
+python -m semantica_external.workbench > public-workbench.html
+```
+
 ## Run locally
 
 ```sh
@@ -61,6 +75,7 @@ python3 -m venv .venv
 ## Repository layout
 
 - `src/semantica_external/` — deterministic read-only demo API
+- `public-workbench.html` — standalone view generated from the public fixture
 - `src/semantica_external/data/` — pseudonymized bounded fixture
 - `docs/` — architecture, status and privacy limits
 - `tests/` — semantic, fail-closed and privacy regressions
