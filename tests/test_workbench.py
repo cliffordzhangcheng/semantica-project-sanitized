@@ -36,3 +36,16 @@ def test_public_workbench_covers_all_four_read_only_views() -> None:
     assert "DOCUMENT_VERSION_CONFLICT" in page
     assert "individual off-hire event remains UNKNOWN" in page
     assert "Observed dates and source values are redacted" in page
+
+
+def test_decision_model_withholds_new_private_case_aggregate() -> None:
+    page = render_workbench()
+    assert 'id="decision-boundary"' in page
+    assert 'Six report classes stay distinct' in page
+    assert all(label in page for label in (
+        'Customer empty-return report', 'Carrier terminal-movement report',
+        'Nominated-depot instruction report', 'Alternate-site claim report',
+        'Batch off-hire candidate report', 'Later confirmation-message report',
+    ))
+    assert re.search(r"Gate-In candidate:\s*<strong>\d+", page) is None
+    assert re.search(r"WB-C\d{2}", page) is None

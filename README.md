@@ -51,6 +51,12 @@ payment, settlement or individual off-hire events.
 
 ## Public case workbench
 
+The latest Workbench decision model shows how six report classes remain
+separate and why a candidate observation cannot establish depot acceptance,
+EIR, payment, individual off-hire or canonical admission. This public page uses
+only the existing pseudonymous demonstration fixture. It does not publish the
+newer private case's aggregate counts, individual states, dates or source IDs.
+
 [Open the static public workbench](public-workbench.html) or download the HTML
 file and open it locally. It displays the same 26 pseudonymous identities,
 reported coverage, per-container timelines and off-hire status, missing
