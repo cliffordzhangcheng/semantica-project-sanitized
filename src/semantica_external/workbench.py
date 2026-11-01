@@ -24,6 +24,16 @@ def _list(items: list[object]) -> str:
     return "<ul>" + "".join(f"<li>{_text(item)}</li>" for item in items) + "</ul>"
 
 
+EVENT_BOUNDARIES = (
+    "Customer empty-return report",
+    "Carrier terminal-movement report",
+    "Nominated-depot instruction report",
+    "Alternate-site claim report",
+    "Batch off-hire candidate report",
+    "Later confirmation-message report",
+)
+
+
 def render_workbench() -> str:
     """Return standalone HTML; every displayed business value comes from public_demo.json."""
     demo = load_demo()
@@ -89,6 +99,7 @@ thead th {{ position: sticky; top: 0; background: Canvas; }}
 <p>This is a pseudonymous, read-only engineering demo. Candidate observations
 are not verified events; the case is not a production or canonical record.</p>
 <nav aria-label="Workbench views"><a href="#summary">Case</a>
+<a href="#decision-boundary">Decision boundary</a>
 <a href="#container-table">Containers</a><a href="#details">Timelines and status</a>
 <a href="#missing">Missing evidence</a><a href="#explanation">Status explanation</a></nav></header>
 <section aria-labelledby="summary"><h2 id="summary">Bounded case</h2>
@@ -99,6 +110,15 @@ are not verified events; the case is not a production or canonical record.</p>
 <p>Carrier off-hire reports: <strong>{_text(coverage['carrier_notified_off_hire'])}</strong></p>
 <p>Billing off-hire reports: <strong>{_text(coverage['billing_reported_off_hire'])}</strong></p>
 </div></section>
+<section aria-labelledby="decision-boundary"><h2 id="decision-boundary">Latest Workbench decision model</h2>
+<p>A Gate-In claim can be a candidate or unknown; neither establishes actual
+nominated-depot acceptance or an equipment interchange receipt (EIR). A
+lot-level report cannot establish an individual off-hire event. Payment,
+settlement, closure and canonical admission need their own evidence and
+approval. The current private case's counts and identities are withheld.</p>
+<p>Six report classes stay distinct. This demonstration lists their types only,
+without private source references, observed dates or container links:</p>
+{_list(list(EVENT_BOUNDARIES))}</section>
 <section aria-labelledby="finance"><h2 id="finance">Financial boundaries</h2>
 <p>Receipt allocation: {_text(finance['allocation'])}; payments:
 {_text(finance['payments'])}; settlement: {_text(finance['settlement'])};
