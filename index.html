@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A privacy-preserving, read-only logistics ontology demo showing evidence lineage and uncertainty.">
+  <title>Semantica — Public Logistics Workbench</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f7fb; color: #172437; line-height: 1.6; }
+    main { max-width: 960px; margin: 0 auto; padding: clamp(30px, 7vw, 76px) 22px; }
+    .eyebrow { display: inline-block; padding: 5px 12px; border: 1px solid #bed0e5; border-radius: 99px; color: #224c78; font-size: 13px; font-weight: 700; letter-spacing: .05em; }
+    h1 { font-size: clamp(35px, 5.8vw, 56px); line-height: 1.12; letter-spacing: -.035em; margin: 24px 0; }
+    .lead { max-width: 730px; font-size: clamp(17px, 2.4vw, 21px); color: #3f526b; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 30px 0 46px; }
+    a { color: #14549e; }
+    .action { display: inline-block; padding: 12px 18px; border-radius: 10px; border: 1px solid #c1d1e2; text-decoration: none; background: white; color: #164f8c; font-weight: 700; }
+    .primary { background: #164f8c; border-color: #164f8c; color: white; }
+    .action:focus-visible, a:focus-visible { outline: 3px solid #ef9c40; outline-offset: 3px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 16px; margin: 24px 0 38px; }
+    .card { background: #fff; border: 1px solid #dde5ee; border-radius: 14px; padding: 20px; }
+    .card strong { display: block; margin-bottom: 7px; }
+    h2 { font-size: 22px; margin: 34px 0 10px; }
+    .note { border-left: 4px solid #4e759d; padding: 14px 18px; background: #eaf1f8; border-radius: 0 9px 9px 0; }
+    footer { border-top: 1px solid #d7e0ea; margin-top: 42px; padding-top: 18px; font-size: 14px; color: #51647b; }
+  </style>
+</head>
+<body>
+<main>
+  <span class="eyebrow">SANITIZED ENGINEERING DEMO · READ ONLY</span>
+  <h1>Evidence-aware logistics, made inspectable.</h1>
+  <p class="lead">Explore a bounded logistics ontology case without exposing customer records. The Workbench distinguishes reported observations, uncertain event dates, missing evidence and financial settlement states.</p>
+  <div class="actions">
+    <a class="action primary" href="./public-workbench.html">Open public Workbench</a>
+    <a class="action" href="https://github.com/cliffordzhangcheng/semantica-project-sanitized">View open source repository</a>
+  </div>
+  <h2>What you can inspect</h2>
+  <section class="grid" aria-label="Demo capabilities">
+    <div class="card"><strong>26 pseudonymous containers</strong><span>Read-only container observations, candidate timelines and status.</span></div>
+    <div class="card"><strong>Separate event semantics</strong><span>Gate-in, off-hire and lot-level completion stay distinct.</span></div>
+    <div class="card"><strong>Missing-evidence reasoning</strong><span>Explicit uncertainty, reconciliation requirements and blocking gates.</span></div>
+    <div class="card"><strong>Financial boundaries</strong><span>Receipt, allocation, payment and settlement never collapse into one status.</span></div>
+  </section>
+  <h2>Scope and privacy</h2>
+  <div class="note">
+    This is a fixed, pseudonymized demonstration fixture—not a live operational dashboard, verified business record or production integration. No private case records, personal contact details, raw evidence, credentials or internal control-plane metadata are published here. Unknown and candidate states remain unresolved.
+  </div>
+  <footer>
+    <a href="https://github.com/cliffordzhangcheng/semantica-project-sanitized/blob/main/docs/PRIVACY.md">Privacy boundary</a>
+    · <a href="https://github.com/cliffordzhangcheng/semantica-project-sanitized/blob/main/docs/STATUS_AND_LIMITS.md">Status and limitations</a>
+  </footer>
+</main>
+</body>
+</html>
