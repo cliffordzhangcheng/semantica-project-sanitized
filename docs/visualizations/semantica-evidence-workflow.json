@@ -1,0 +1,221 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Semantica：只读查询与证据边界",
+    "subtitle": "公开匿名样本的确定性查询路径（工程候选；非生产流程）",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "output": "outputs/semantica-evidence-workflow.html",
+    "repository": {
+      "url": "https://github.com/cliffordzhangcheng/semantica-project-sanitized.git",
+      "revision": "3dbda49eba2a3e6ee6eb0d01554b54763720cf20",
+      "provider": "github",
+      "link_mode": "web"
+    }
+  },
+  "lanes": [
+    {
+      "id": "caller",
+      "label": "使用者"
+    },
+    {
+      "id": "core",
+      "label": "确定性查询"
+    },
+    {
+      "id": "guard",
+      "label": "证据与安全边界",
+      "variant": "exception"
+    },
+    {
+      "id": "presentation",
+      "label": "静态交付"
+    }
+  ],
+  "mainPath": [
+    "request",
+    "load",
+    "validate",
+    "project",
+    "envelope",
+    "show"
+  ],
+  "nodes": [
+    {
+      "id": "request",
+      "lane": "caller",
+      "col": 0,
+      "type": "external",
+      "label": "只读查询",
+      "sublabel": "已知匿名箱号／案件",
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 28,
+          "end_line": 56
+        }
+      ]
+    },
+    {
+      "id": "load",
+      "lane": "core",
+      "col": 1,
+      "type": "database",
+      "label": "加载公开样本",
+      "sublabel": "public_demo.json",
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 24,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "validate",
+      "lane": "core",
+      "col": 2,
+      "type": "security",
+      "label": "校验真实性状态",
+      "sublabel": "覆盖 / 付款 / 结案",
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 31,
+          "end_line": 53
+        }
+      ]
+    },
+    {
+      "id": "project",
+      "lane": "core",
+      "col": 3,
+      "type": "backend",
+      "label": "四种查询能力",
+      "sublabel": "Timeline / Off-hire / 缺口 / 解释",
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 101,
+          "end_line": 102
+        },
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 159,
+          "end_line": 180
+        }
+      ]
+    },
+    {
+      "id": "envelope",
+      "lane": "core",
+      "col": 4,
+      "type": "backend",
+      "label": "可信边界封装",
+      "sublabel": "候选 / UNKNOWN / 语义哈希",
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 68,
+          "end_line": 86
+        }
+      ]
+    },
+    {
+      "id": "unknown",
+      "lane": "guard",
+      "col": 4,
+      "type": "security",
+      "label": "未知标识拒绝",
+      "sublabel": "UnknownIdentityError",
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 56,
+          "end_line": 65
+        }
+      ]
+    },
+    {
+      "id": "show",
+      "lane": "presentation",
+      "col": 5,
+      "type": "frontend",
+      "label": "独立 HTML 展示",
+      "sublabel": "无脚本、无写入",
+      "sources": [
+        {
+          "path": "src/semantica_external/workbench.py",
+          "line": 37,
+          "end_line": 61
+        },
+        {
+          "path": "README.md",
+          "line": 50,
+          "end_line": 62
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "request",
+      "to": "load"
+    },
+    {
+      "id": "e2",
+      "from": "load",
+      "to": "validate"
+    },
+    {
+      "id": "e3",
+      "from": "validate",
+      "to": "project"
+    },
+    {
+      "id": "e4",
+      "from": "project",
+      "to": "envelope"
+    },
+    {
+      "id": "e5",
+      "from": "project",
+      "to": "unknown",
+      "role": "error",
+      "variant": "security"
+    },
+    {
+      "id": "e6",
+      "from": "envelope",
+      "to": "show"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "事实边界",
+      "items": [
+        "Observation ≠ Event；Gate-In ≠ Off-Hire",
+        "批次级确认不等于逐箱核销"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "没有被推断出的事实",
+      "items": [
+        "收据 ≠ 付款 ≠ 分配 ≠ 结算",
+        "公开样本：26 箱均为 CANDIDATE；案件 OPEN"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "外发用途",
+      "items": [
+        "仅公开匿名样本、只读查询；真实业务状态仍需证据核验",
+        "本图展示的是代码中的查询职责，不表示生产部署"
+      ]
+    }
+  ]
+}

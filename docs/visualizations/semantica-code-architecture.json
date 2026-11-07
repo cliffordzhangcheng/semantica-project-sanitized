@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Semantica public demo — architecture",
+    "subtitle": "Source-linked code architecture · read-only engineering candidate, not production",
+    "quality_profile": "showcase",
+    "output": "outputs/semantica-code-architecture.html",
+    "repository": {
+      "url": "https://github.com/cliffordzhangcheng/semantica-project-sanitized.git",
+      "revision": "3dbda49eba2a3e6ee6eb0d01554b54763720cf20",
+      "provider": "github",
+      "link_mode": "web"
+    }
+  },
+  "components": [
+    {
+      "id": "fixture",
+      "type": "database",
+      "label": "Pseudonymous fixture",
+      "sublabel": "26 candidate container IDs",
+      "pos": [
+        45,
+        160
+      ],
+      "size": [
+        176,
+        72
+      ],
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 24,
+          "end_line": 28
+        }
+      ]
+    },
+    {
+      "id": "loader",
+      "type": "backend",
+      "label": "Validated load",
+      "sublabel": "Coverage and truth states",
+      "pos": [
+        270,
+        160
+      ],
+      "size": [
+        176,
+        72
+      ],
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 31,
+          "end_line": 53
+        }
+      ]
+    },
+    {
+      "id": "queries",
+      "type": "backend",
+      "label": "Read-only queries",
+      "sublabel": "4 deterministic functions",
+      "pos": [
+        495,
+        160
+      ],
+      "size": [
+        176,
+        72
+      ],
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 89,
+          "end_line": 102
+        }
+      ]
+    },
+    {
+      "id": "envelope",
+      "type": "security",
+      "label": "Evidence envelope",
+      "sublabel": "UNKNOWN, refs, hash",
+      "pos": [
+        720,
+        160
+      ],
+      "size": [
+        176,
+        72
+      ],
+      "sources": [
+        {
+          "path": "src/semantica_external/demo.py",
+          "line": 68,
+          "end_line": 86
+        }
+      ]
+    },
+    {
+      "id": "renderer",
+      "type": "backend",
+      "label": "HTML generator",
+      "sublabel": "Public fixture only",
+      "pos": [
+        495,
+        350
+      ],
+      "size": [
+        176,
+        72
+      ],
+      "sources": [
+        {
+          "path": "src/semantica_external/workbench.py",
+          "line": 37,
+          "end_line": 61
+        }
+      ]
+    },
+    {
+      "id": "html",
+      "type": "frontend",
+      "label": "Standalone HTML",
+      "sublabel": "No network or writes",
+      "pos": [
+        780,
+        350
+      ],
+      "size": [
+        176,
+        72
+      ],
+      "sources": [
+        {
+          "path": "src/semantica_external/workbench.py",
+          "line": 80,
+          "end_line": 100
+        }
+      ]
+    },
+    {
+      "id": "reader",
+      "type": "external",
+      "label": "External reviewer",
+      "sublabel": "Local browser opens file",
+      "pos": [
+        1065,
+        350
+      ],
+      "size": [
+        176,
+        72
+      ],
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 50,
+          "end_line": 62
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "fixture",
+      "to": "loader",
+      "label": "reads"
+    },
+    {
+      "from": "loader",
+      "to": "queries",
+      "label": "validated copy"
+    },
+    {
+      "from": "queries",
+      "to": "envelope",
+      "label": "semantic result"
+    },
+    {
+      "from": "queries",
+      "to": "renderer",
+      "label": "render query views"
+    },
+    {
+      "from": "renderer",
+      "to": "html",
+      "label": "generates"
+    },
+    {
+      "from": "html",
+      "to": "reader",
+      "label": "opens locally"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Deterministic by design",
+      "items": [
+        "No write API, persistence, execution or production integration",
+        "Separate observations from events and financial settlement"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Public scope",
+      "items": [
+        "Pseudonymized fixture only; dates and confidential sources redacted",
+        "Candidate status is never silently promoted to verified"
+      ]
+    }
+  ]
+}
